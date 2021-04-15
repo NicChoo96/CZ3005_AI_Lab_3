@@ -1,4 +1,4 @@
-# CZ3005_AI_Lab_5
+# CZ3005_AI_Lab_3
 Prolog subway menu
 
 # Question 3: Subway Sandwich Interactor 
