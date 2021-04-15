@@ -1,8 +1,4 @@
 /*
-Made by Choo Jian Hao
-Date: 15/04/2021
-NTU Year 3 CZ3005 Lab 5
-
 Subway Menu
 
 Bread Options:
@@ -96,8 +92,10 @@ order_subway():-
 init_question([Head|Tail]):-
   asserta(chosen_option([])),
   meal(W),
-  display_list(W), nl,
-  write("Enter your choice: "),
+  nl,
+  writeln("Meal Menu:"),
+  display_list(W), nl, nl,
+  write("Choose your preferred type of meal from above: "),
   read(InputChoice),
   (item_in_list(InputChoice, W) -> 
 				asserta(chosen_meal(InputChoice)), append_chosen_option(InputChoice),
@@ -111,14 +109,17 @@ next_question([Head|Tail]):-
   (Head == sandwich)-> (sandwich_question(), !, next_question(Tail));
   (Head == salad)-> (salad_question(), !, next_question(Tail));
   (Head == sauce)-> (sauce_question(), !, next_question(Tail));
-  (Head == top_up)-> ( ((X \== value)->top_up_question() ), !, next_question(Tail));
+  (Head == top_up)-> ( ((X \= value)->top_up_question();!), !, next_question(Tail));
   (Head == sides)-> (sides_question(), !, next_question(Tail));
   (Head == drinks)-> (drinks_question(), !, next_question(Tail)).
 
 next_question([]):- 
+  nl,
   writeln("You have completed your orders!"),
   writeln("Let me repeat your order"),
+  nl,
   chosen_option(X), display_list(X), 
+  nl,
   writeln("Press any key to confirm order!"), !,
   read(quitChoice), abort, !.
 
@@ -194,7 +195,7 @@ sides_question():-
 drinks_question():- 
   nl,
   drinks(X),
-  writeln("Drinks Menu: "),
+  writeln("Drinks Menu: "), nl,
   display_list(X), nl,
   write("Enter your choice: "),
   read(InputChoice),
