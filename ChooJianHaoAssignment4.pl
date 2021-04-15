@@ -216,7 +216,7 @@ append_chosen_option(X):-
 
 
 % KBS Options
-questions([meal, top_up, bread, sandwich, salad, sauce, top_up, sides, drinks]).
+questions([meal, bread, sandwich, salad, sauce, top_up, sides, drinks]).
 meal([normal, veggie, healthy, vegan, value]).
 bread([italian_wheat, hearty_italian, honey_oat, parmesan_oregano, multigrain, flatbread]).
 sandwich([chicken_bacon_ranch, chicken_teriyaki, cold_cut_trio, egg_mayo, italian_bmt, meatball_marina_melt, roast_beef, roasted_chicken_breast, steak_and_cheese, subway_club, chicken_ham, subway_melt, tuna, turkey, veggie_delite, veggie_patty]).
