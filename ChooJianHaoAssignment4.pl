@@ -104,12 +104,11 @@ init_question([Head|Tail]):-
 
 next_question([Head|Tail]):- 
 % print_all_selected(),
-  chosen_meal(X),
   (Head == bread)-> (bread_question(), !, next_question(Tail));
   (Head == sandwich)-> (sandwich_question(), !, next_question(Tail));
   (Head == salad)-> (salad_question(), !, next_question(Tail));
   (Head == sauce)-> (sauce_question(), !, next_question(Tail));
-  (Head == top_up)-> (((X \= value)->top_up_question(); next_question(Tail)), !, next_question(Tail));
+  (Head == top_up)-> (top_up_question(), !, next_question(Tail));
   (Head == sides)-> (sides_question(), !, next_question(Tail));
   (Head == drinks)-> (drinks_question(), !, next_question(Tail)).
 
@@ -137,7 +136,7 @@ bread_question():-
 sandwich_question():- 
   nl,
   chosen_meal(Y),
-  ((Y == veggie)-> ( veggie(X), writeln("Only Veggie Sandwiches"), !); sandwich(X)),
+  ((Y == veggie | Y == vegan)-> ( veggie(X), writeln("Only Veggie Sandwiches"), !); sandwich(X)),
   writeln("Sandwich Menu: "),
   display_list(X), nl,
   write("Enter your choice: "),
@@ -172,6 +171,7 @@ salad_question():-
 top_up_question():- 
   nl,
   chosen_meal(Y),
+  ((Y == value)-> !;
   ((Y == vegan)-> ( vegan(X), writeln("No Cheese"), !); top_up(X)),
   writeln("Top Up Menu: "),
   display_list(X), nl,
@@ -179,7 +179,7 @@ top_up_question():-
   read(InputChoice),
   (item_in_list(InputChoice, X) -> (
 				append_chosen_option(InputChoice),
-				writeln("Selected Option: "), writeln(InputChoice), !); writeln("Enter one of the listed option!"), top_up_question()).
+				writeln("Selected Option: "), writeln(InputChoice), !); writeln("Enter one of the listed option!"), top_up_question())).
 
 sides_question():- 
   nl,
